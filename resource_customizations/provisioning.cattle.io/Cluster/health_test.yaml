@@ -1,0 +1,9 @@
+tests:
+- healthStatus:
+    status: Progressing
+    message: 'Upgrading'
+  inputPath: testdata/rollingnodes.yaml
+- healthStatus:
+    status: Healthy
+    message: 'Cluster is running'
+  inputPath: testdata/healthy_provisioned.yaml

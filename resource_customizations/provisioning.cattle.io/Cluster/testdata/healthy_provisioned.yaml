@@ -1,0 +1,168 @@
+apiVersion: provisioning.cattle.io/v1
+kind: Cluster
+metadata:
+  annotations:
+    argocd.argoproj.io/tracking-id: rke2-cluster-api-born-clustername:provisioning.cattle.io/Cluster:fleet-default/clustername
+    field.cattle.io/creatorId: username
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"provisioning.cattle.io/v1","kind":"Cluster","metadata":{"annotations":{"argocd.argoproj.io/tracking-id":"rke2-cluster-api-born-clustername:provisioning.cattle.io/Cluster:fleet-default/clustername"},"name":"clustername","namespace":"fleet-default"},"spec":{"cloudCredentialSecretName":"cattle-global-data:vsphere","enableNetworkPolicy":true,"kubernetesVersion":"v1.24.4+rke2r1","rkeConfig":{"localClusterAuthEndpoint":{"caCerts":null,"enabled":true,"fqdn":"lab5846.alpha.k8s.aintern.se"},"machineGlobalConfig":{"cni":"calico","disable":["rke2-ingress-nginx"],"etcd-expose-metrics":true,"tls-san":["lab5846.alpha.k8s.aintern.se"]},"machinePools":[{"controlPlaneRole":true,"displayName":"ControlPlane (etcd, master ..)","drainBeforeDelete":true,"etcdRole":true,"hostnamePrefix":"control-plane-","machineConfigRef":{"kind":"VmwarevsphereConfig","name":"clustername-control-plane"},"name":"control-plane","quantity":3,"workerRole":false},{"displayName":"Worker nodes dc1","drainBeforeDelete":true,"hostnamePrefix":"worker1-","labels":{"afa.se/dc":"dc1"},"machineConfigRef":{"kind":"VmwarevsphereConfig","name":"clustername-worker1"},"name":"worker1","quantity":2,"unhealthyNodeTimeout":"600s","workerRole":true},{"displayName":"Worker nodes dc2","drainBeforeDelete":true,"hostnamePrefix":"worker2-","labels":{"afa.se/dc":"dc2"},"machineConfigRef":{"kind":"VmwarevsphereConfig","name":"clustername-worker2"},"name":"worker2","quantity":2,"unhealthyNodeTimeout":"600s","workerRole":true}],"registries":{"mirrors":{"docker.io":{"endpoint":["https://docker-hub-proxy.ilharbor01.domain.se"]},"ghcr.io":{"endpoint":["https://ghcr-io-proxy.ilharbor01.domain.se"]},"k8s.gcr.io":{"endpoint":["https://k8s-gcr-proxy.ilharbor01.domain.se"]},"quay.io":{"endpoint":["https://quay-proxy.ilharbor01.domain.se"]},"registry.opensource.zalan.do":{"endpoint":["https://zalan-do-proxy.ilharbor01.domain.se"]}}},"upgradeStrategy":{"controlPlaneConcurrency":"10%","controlPlaneDrainOptions":{"deleteEmptyDirData":true,"enabled":true,"force":true,"gracePeriod":300,"ignoreDaemonSets":true,"ignoreErrors":true,"skipWaitForDeleteTimeoutSeconds":600,"timeout":600},"workerConcurrency":"10%","workerDrainOptions":{"deleteEmptyDirData":true,"enabled":true,"force":true,"gracePeriod":300,"ignoreDaemonSets":true,"ignoreErrors":true,"skipWaitForDeleteTimeoutSeconds":600,"timeout":600}}}}}
+  creationTimestamp: "2023-01-26T18:03:14Z"
+  finalizers:
+  - wrangler.cattle.io/cloud-config-secret-remover
+  - wrangler.cattle.io/provisioning-cluster-remove
+  - wrangler.cattle.io/rke-cluster-remove
+  generation: 6
+  name: clustername
+  namespace: fleet-default
+  resourceVersion: "10441598"
+  uid: 93f7650d-ffdc-4143-9b11-4b0f3079b9cf
+spec:
+  cloudCredentialSecretName: cattle-global-data:vsphere
+  defaultPodSecurityPolicyTemplateName: ""
+  enableNetworkPolicy: true
+  kubernetesVersion: v1.24.4+rke2r1
+  localClusterAuthEndpoint: {}
+  rkeConfig:
+    chartValues: {}
+    etcd:
+      disableSnapshots: false
+      s3: null
+      snapshotRetention: 5
+      snapshotScheduleCron: 0 */5 * * *
+    machineGlobalConfig:
+      cni: calico
+      disable:
+      - rke2-ingress-nginx
+      etcd-expose-metrics: true
+      profile: null
+    machinePools:
+    - controlPlaneRole: true
+      displayName: ControlPlane (etcd, master ..)
+      drainBeforeDelete: true
+      etcdRole: true
+      machineConfigRef:
+        kind: VmwarevsphereConfig
+        name: clustername-control-plane
+      name: control-plane
+      quantity: 3
+      workerRole: false
+    - displayName: Worker nodes dc1
+      drainBeforeDelete: true
+      labels:
+        afa.se/dc: dc1
+      machineConfigRef:
+        kind: VmwarevsphereConfig
+        name: clustername-worker1
+      name: worker1
+      quantity: 2
+      unhealthyNodeTimeout: 600s
+      workerRole: true
+    - displayName: Worker nodes dc2
+      drainBeforeDelete: true
+      labels:
+        afa.se/dc: dc2
+      machineConfigRef:
+        kind: VmwarevsphereConfig
+        name: clustername-worker2
+      name: worker2
+      quantity: 2
+      unhealthyNodeTimeout: 600s
+      workerRole: true
+    machineSelectorConfig:
+    - config: {}
+    registries:
+      configs: {}
+      mirrors: {}
+    upgradeStrategy:
+      controlPlaneConcurrency: 10%
+      controlPlaneDrainOptions:
+        deleteEmptyDirData: true
+        disableEviction: false
+        enabled: true
+        force: true
+        gracePeriod: 300
+        ignoreDaemonSets: true
+        ignoreErrors: true
+        skipWaitForDeleteTimeoutSeconds: 600
+        timeout: 600
+      workerConcurrency: 10%
+      workerDrainOptions:
+        deleteEmptyDirData: true
+        disableEviction: false
+        enabled: true
+        force: true
+        gracePeriod: 300
+        ignoreDaemonSets: true
+        ignoreErrors: true
+        skipWaitForDeleteTimeoutSeconds: 600
+        timeout: 600
+status:
+  agentDeployed: true
+  clientSecretName: clustername-kubeconfig
+  clusterName: c-m-5qwdlrcb
+  conditions:
+  - lastUpdateTime: "2023-01-26T18:16:36Z"
+    status: "False"
+    type: Reconciling
+  - lastUpdateTime: "2023-01-26T18:03:14Z"
+    status: "False"
+    type: Stalled
+  - lastUpdateTime: "2023-02-02T03:55:52Z"
+    status: "True"
+    type: Created
+  - lastUpdateTime: "2023-02-02T03:55:43Z"
+    status: "True"
+    type: RKECluster
+  - lastUpdateTime: "2023-01-26T18:03:14Z"
+    status: "True"
+    type: BackingNamespaceCreated
+  - lastUpdateTime: "2023-01-26T18:03:14Z"
+    status: "True"
+    type: DefaultProjectCreated
+  - lastUpdateTime: "2023-01-26T18:03:14Z"
+    status: "True"
+    type: SystemProjectCreated
+  - lastUpdateTime: "2023-01-26T18:03:14Z"
+    status: "True"
+    type: InitialRolesPopulated
+  - lastUpdateTime: "2023-01-26T18:03:15Z"
+    status: "True"
+    type: CreatorMadeOwner
+  - lastUpdateTime: "2023-01-26T18:03:15Z"
+    status: "True"
+    type: NoDiskPressure
+  - lastUpdateTime: "2023-01-26T18:03:15Z"
+    status: "True"
+    type: NoMemoryPressure
+  - lastUpdateTime: "2023-01-26T18:03:15Z"
+    status: "True"
+    type: SecretsMigrated
+  - lastUpdateTime: "2023-01-26T18:03:15Z"
+    status: "True"
+    type: ServiceAccountSecretsMigrated
+  - lastUpdateTime: "2023-01-26T18:14:23Z"
+    status: "True"
+    type: Provisioned
+  - lastUpdateTime: "2023-02-02T03:55:43Z"
+    status: "True"
+    type: Connected
+  - lastUpdateTime: "2023-02-02T03:55:43Z"
+    status: "True"
+    type: Updated
+  - lastUpdateTime: "2023-02-02T03:55:52Z"
+    status: "True"
+    type: Ready
+  - lastUpdateTime: "2023-01-26T18:16:21Z"
+    status: "True"
+    type: GlobalAdminsSynced
+  - lastUpdateTime: "2023-01-26T18:16:23Z"
+    status: "True"
+    type: SystemAccountCreated
+  - lastUpdateTime: "2023-01-26T18:16:25Z"
+    status: "True"
+    type: AgentDeployed
+  - lastUpdateTime: "2023-01-26T18:16:36Z"
+    status: "True"
+    type: Waiting
+  observedGeneration: 6
+  ready: true
