@@ -1,9 +1,9 @@
 function getUpdatedContitionStatus(obj, hs)
     if obj.status ~= nil and obj.status.conditions ~= nil then
         for i, condition in ipairs(obj.status.conditions) do
-        if condition.type == "Updated" and condition.status != "True" then
+        if condition.type == "Updated" and condition.status ~= "True" then
             hs.status = "Progressing"
-            hs.message = condition.reason + condition.message
+            hs.message = condition.message
             return hs
         end
         end

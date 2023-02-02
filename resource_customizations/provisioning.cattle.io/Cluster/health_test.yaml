@@ -1,7 +1,7 @@
 tests:
 - healthStatus:
     status: Progressing
-    message: 'Upgrading'
+    message: 'draining bootstrap node(s) clustername-control-plane-5fb56b4d5d-hr6zg: error draining machine clustername-control-plane-5fb56b4d5d-hr6zg: the server was unable to return a response in the time allotted, but may still be processing the request (get nodes clustername-control-plane-14eeb33d-bs2w6)'
   inputPath: testdata/rollingnodes.yaml
 - healthStatus:
     status: Healthy
